@@ -101,8 +101,17 @@ for col in input_data.columns:
     if col in encoders:
         input_data[col] = encoders[col].transform(input_data[col])
 
-input_data = input_data.reindex(columns=X.columns, fill_value=0)
+# Match training columns
+input_data = input_data.reindex(columns=X.columns)
 
+# Convert everything to numeric
+input_data = input_data.apply(pd.to_numeric, errors="coerce")
+
+# Fill missing values
+input_data = input_data.fillna(0)
+
+# Final datatype
+input_data = input_data.astype(float)
 # -----------------------
 # Predict
 # -----------------------
