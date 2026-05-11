@@ -5,8 +5,12 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.linear_model import LogisticRegression
 
 # Load dataset
-df = pd.read_csv("Loan_Prediction.csv")
+import os
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+csv_path = os.path.join(BASE_DIR, "Loan_Prediction.csv")
+
+df = pd.read_csv(csv_path)
 # Drop Loan_ID
 if "Loan_ID" in df.columns:
     df.drop("Loan_ID", axis=1, inplace=True)
